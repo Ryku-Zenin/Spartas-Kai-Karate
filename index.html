@@ -14,6 +14,7 @@
     <script src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@1.0.19/bundled/lenis.min.js"></script>
 
     <style>
+        body { overflow-x: hidden; }
         :root {
             --bg: #000000;
             --accent: #ff0000;
@@ -73,9 +74,8 @@
         }
         section.active { opacity: 1; visibility: visible; transform: scale(1); filter: blur(0px); }
 
-        /* --- HOME: TYPOGRAPHY FOCUS --- */
-        .hero-title {
       .hero-title {
+          .hero-title { font-size: clamp(3rem, 12vw, 10rem) !important; }
     font-family: 'Syncopate', sans-serif;
     /* We bumped the preferred size to 25vw to make it bigger */
     /* We set the min to 5rem to keep it huge even on mobile */
@@ -282,5 +282,7 @@
 
     
 </html>
+
+
 
 
