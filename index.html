@@ -16,7 +16,7 @@
     <style>
         body { overflow-x: hidden; }
         :root {
-            --bg: #000000;
+            --bg: #A9A9A9;
             --accent: #ff0000;
             --text-high: #ffffff;
             --text-low: #333333;
@@ -34,18 +34,6 @@
             font-family: var(--font-main);
             overflow: hidden;
             -webkit-font-smoothing: antialiased;
-        }
-
-        /* --- THE CURSOR (REACTIVE) --- */
-        #cursor {
-            position: fixed; width: 6px; height: 6px; background: var(--text-high);
-            border-radius: 50%; pointer-events: none; z-index: 10000;
-            mix-blend-mode: difference;
-        }
-        #aura {
-            position: fixed; width: 40px; height: 40px; border: 0.5px solid var(--accent);
-            border-radius: 50%; pointer-events: none; z-index: 9999;
-            transition: transform 0.2s cubic-bezier(0.23, 1, 0.32, 1);
         }
 
         /* --- UI ELEMENTS --- */
