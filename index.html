@@ -4,161 +4,269 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SPARTAS KAI | BEST EU KARATE</title>
-    
+
     <link rel="icon" type="image/png" href="Screenshot_2026-04-24_233716-removebg-preview.png">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Syne:wght@800&family=Outfit:wght@100;300;900&family=Fraunces:ital,opsz,wght@1,9..144,700&display=swap" rel="stylesheet">
-    
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1.0.6/bundled/lenis.min.js"></script>
 
-
     <style>
-        body { overflow-x: hidden; }
         :root {
-            --bg: #36393e;
+            --bg: #2a2c30; /* darker Discord grey */
             --accent: #ff0000;
             --text-high: #ffffff;
-            --text-low: #333333;
+            --text-low: #999999;
             --font-main: 'Syne', sans-serif;
             --font-bible: 'Fraunces', serif;
             --font-ui: 'Outfit', sans-serif;
         }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; cursor: none; }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
         ::-webkit-scrollbar { display: none; }
 
         body {
             background-color: var(--bg);
             color: var(--text-high);
             font-family: var(--font-main);
-            overflow: hidden;
+            overflow-x: hidden;
             -webkit-font-smoothing: antialiased;
         }
 
-        /* --- UI ELEMENTS --- */
+        /* NAV */
         nav {
-            position: fixed; top: 0; width: 100%; padding: 50px;
-            display: flex; justify-content: space-between; align-items: center; z-index: 1000;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 2rem 10%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
         }
-        .nav-logo { font-size: 1.2rem; letter-spacing: -1px; font-weight: 800; }
-        .nav-links { display: flex; gap: 40px; }
+
+        .nav-logo {
+            font-size: 1.2rem;
+            font-weight: 800;
+            letter-spacing: -1px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+
         .nav-links a {
-            text-decoration: none; color: var(--text-high); font-size: 10px;
-            text-transform: uppercase; letter-spacing: 4px; font-weight: 300;
-            opacity: 0.3; transition: 0.4s; font-family: var(--font-ui);
+            text-decoration: none;
+            color: var(--text-high);
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            opacity: 0.4;
+            transition: 0.3s;
+            font-family: var(--font-ui);
         }
-        .nav-links a:hover, .nav-links a.active { opacity: 1; color: var(--accent); }
 
-        /* --- PAGE SYSTEM --- */
-        .page-container { width: 100%; height: 100vh; position: relative; }
-        
+        .nav-links a:hover,
+        .nav-links a.active {
+            opacity: 1;
+            color: var(--accent);
+        }
+
+        /* PAGE SYSTEM */
+        .page-container {
+            width: 100%;
+            height: 100vh;
+            position: relative;
+            padding-top: 120px;
+        }
+
         section {
-            position: absolute; inset: 0; padding: 0 10%;
-            display: flex; flex-direction: column; justify-content: center;
-            opacity: 0; visibility: hidden; transform: scale(1.05);
-            transition: opacity 0.8s ease, transform 0.8s ease, filter 0.8s ease;
+            position: absolute;
+            inset: 0;
+            padding: 0 10%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            opacity: 0;
+            visibility: hidden;
+            transform: scale(1.05);
             filter: blur(10px);
+            transition: 0.6s ease;
         }
-        section.active { opacity: 1; visibility: visible; transform: scale(1); filter: blur(0px); }
 
-      /* 1. Cap the title size so it doesn't swallow the laptop screen */
-.hero-title {
-    font-family: 'Syncopate', sans-serif;
-    /* (min: 3rem, preferred: 12vw, max: 8rem) */
-    /* 8rem is the "stop growing" point on big screens */
-    font-size: clamp(3rem, 12vw, 8rem) !important; 
-    line-height: 0.8;
-    text-transform: uppercase;
-    word-break: break-word;
-}
-
-/* 2. Give the layout breathing room on laptops */
-@media (min-width: 1024px) {
-    section {
-        padding-left: 10% !important; /* Moves the text away from the left edge */
-        padding-right: 10% !important;
-    }
-    
-    /* Keep nav clean on desktop */
-    nav {
-        padding: 3rem 10% !important;
-    }
-}
+        section.active {
+            opacity: 1;
+            visibility: visible;
+            transform: scale(1);
+            filter: blur(0px);
         }
+
+        /* HOME */
+        .hero-title {
+            font-size: clamp(3rem, 12vw, 7rem);
+            line-height: 0.8;
+            text-transform: uppercase;
+        }
+
         .hero-sub {
-            font-family: var(--font-ui); font-size: 12px; letter-spacing: 15px;
-            text-transform: uppercase; margin-top: 40px; color: var(--accent);
+            margin-top: 1.5rem;
+            font-family: var(--font-ui);
+            font-size: 0.8rem;
+            letter-spacing: 12px;
+            text-transform: uppercase;
+            color: var(--accent);
         }
 
-        /* --- ABOUT: EDITORIAL --- */
-        .about-header { font-family: var(--font-bible); font-style: italic; font-size: 6vw; margin-bottom: 50px; line-height: 1; }
-        .about-content { 
-            display: grid; grid-template-columns: 1fr 1fr; gap: 100px; 
-            font-family: var(--font-ui); font-weight: 100; line-height: 1.8; color: #999;
+        /* ABOUT */
+        .about-header {
+            font-family: var(--font-bible);
+            font-style: italic;
+            font-size: clamp(2rem, 6vw, 4rem);
+            margin-bottom: 2rem;
         }
+
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            font-family: var(--font-ui);
+            font-weight: 300;
+            line-height: 1.7;
+            color: var(--text-low);
+        }
+
         .hl { color: #fff; font-weight: 900; }
 
-        /* --- ROSTER: BRUTALIST LIST --- */
+        /* ROSTER */
         .roster-list { width: 100%; max-width: 1200px; }
+
         .roster-row {
-            display: flex; justify-content: space-between; align-items: center;
-            padding: 30px 0; border-bottom: 1px solid #1a1a1a; transition: 0.4s;
+            display: flex;
+            justify-content: space-between;
+            padding: 1.5rem 0;
+            border-bottom: 1px solid #1a1a1a;
+            transition: 0.3s;
         }
-        .roster-row:hover { border-bottom-color: var(--accent); padding-left: 20px; }
-        .label { font-family: var(--font-ui); font-size: 10px; text-transform: uppercase; letter-spacing: 3px; color: var(--accent); }
-        .value { font-size: clamp(1.2rem, 3vw, 3rem); font-weight: 800; }
 
-        /* --- BIBLE: SACRED SCROLL --- */
-        .bible-wrap { height: 70vh; overflow-y: auto; scrollbar-width: none; }
-        .bible-item { margin-bottom: 120px; border-left: 2px solid var(--accent); padding-left: 40px; }
-        .rule-no { font-family: var(--font-ui); color: var(--text-low); font-size: 12px; margin-bottom: 10px; }
-        .rule-main { font-family: var(--font-bible); font-style: italic; font-size: 3vw; line-height: 1.1; }
-        .rule-sub { font-family: var(--font-ui); font-size: 11px; color: #666; margin-top: 20px; text-transform: uppercase; letter-spacing: 2px; }
+        .roster-row:hover {
+            border-bottom-color: var(--accent);
+            padding-left: 1rem;
+        }
 
-        /* --- JOIN: MINIMAL CTA --- */
-        .join-wrap { text-align: center; }
+        .label {
+            font-family: var(--font-ui);
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            color: var(--accent);
+        }
+
+        .value {
+            font-size: clamp(1.2rem, 3vw, 2.5rem);
+            font-weight: 800;
+        }
+
+        /* BIBLE */
+        .bible-wrap {
+            height: 70vh;
+            overflow-y: auto;
+        }
+
+        .bible-item {
+            margin-bottom: 4rem;
+            border-left: 2px solid var(--accent);
+            padding-left: 2rem;
+        }
+
+        .rule-no {
+            font-family: var(--font-ui);
+            color: var(--text-low);
+            font-size: 0.7rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .rule-main {
+            font-family: var(--font-bible);
+            font-style: italic;
+            font-size: clamp(1.5rem, 4vw, 3rem);
+            line-height: 1.1;
+        }
+
+        .rule-sub {
+            margin-top: 1rem;
+            font-family: var(--font-ui);
+            font-size: 0.7rem;
+            color: #777;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        /* JOIN */
+        .join-wrap {
+            text-align: center;
+        }
+
         .big-link {
-            font-size: 12vw; color: #fff; text-decoration: none; font-weight: 800;
-            display: block; transition: 0.5s; -webkit-text-stroke: 1px #333;
+            font-size: clamp(3rem, 12vw, 8rem);
+            color: #fff;
+            text-decoration: none;
+            font-weight: 800;
+            display: block;
+            transition: 0.4s;
+            -webkit-text-stroke: 1px #333;
         }
-        .big-link:hover { -webkit-text-stroke: 1px var(--accent); color: transparent; }
-        .req { margin-top: 60px; font-family: var(--font-ui); font-size: 10px; letter-spacing: 5px; opacity: 0.5; }
 
-        /* --- TRANSITION SHUTTER --- */
+        .big-link:hover {
+            color: transparent;
+            -webkit-text-stroke: 1px var(--accent);
+        }
+
+        .req {
+            margin-top: 2rem;
+            font-family: var(--font-ui);
+            font-size: 0.7rem;
+            letter-spacing: 5px;
+            opacity: 0.5;
+        }
+
+        /* SHUTTER */
         #shutter {
-            position: fixed; inset: 0; background: var(--accent);
-            transform: scaleY(0); transform-origin: top; z-index: 9000;
+            position: fixed;
+            inset: 0;
+            background: var(--accent);
+            transform: scaleY(0);
+            transform-origin: top;
+            z-index: 9000;
         }
 
-@media (max-width: 768px) {
-    nav { 
-        flex-direction: column; 
-        gap: 1rem; 
-        padding: 1rem; 
-    }
-    .nav-links { 
-        display: flex; /* Change from 'none' to 'flex' */
-        gap: 1rem; 
-        font-size: 0.6rem; 
-        flex-wrap: wrap; 
-        justify-content: center;
-    }
-    section { padding: 3rem 5%; }
-}
-        }
-        #home {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding-left: 5% !important;
-        }
+        /* MOBILE */
+        @media (max-width: 768px) {
+            nav {
+                flex-direction: column;
+                gap: 1rem;
+                padding: 1rem;
+            }
 
-        .hero-title {
-            font-size: clamp(3rem, 10vw, 6rem) !important; 
+            .nav-links {
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 1rem;
+            }
+
+            .about-content {
+                grid-template-columns: 1fr;
+            }
+
+            section {
+                padding: 2rem 5%;
+            }
         }
     </style>
 </head>
+
 <body>
 
     <div id="shutter"></div>
@@ -175,12 +283,14 @@
     </nav>
 
     <main class="page-container">
-        
+
+        <!-- HOME -->
         <section id="home" class="active">
-        <h1 class="hero-title">SPARTAS<br>KAI</h1>
+            <h1 class="hero-title">SPARTAS<br>KAI</h1>
             <p class="hero-sub">Train Hard. Fight Smart. Rise Strong.</p>
         </section>
 
+        <!-- ABOUT -->
         <section id="about">
             <h2 class="about-header">"The dojo known by <span style="color:var(--accent)">creating</span> their players."</h2>
             <div class="about-content">
@@ -193,6 +303,7 @@
             </div>
         </section>
 
+        <!-- ROSTER -->
         <section id="roster">
             <div class="roster-list">
                 <div class="roster-row"><span class="label">Founders</span><span class="value">Prozidole / Brambus12</span></div>
@@ -202,6 +313,7 @@
             </div>
         </section>
 
+        <!-- BIBLE -->
         <section id="bible">
             <div class="bible-wrap">
                 <div class="bible-item">
@@ -209,26 +321,31 @@
                     <div class="rule-main">No toxicity. Discrimination is death.</div>
                     <div class="rule-sub">Racial slurs result in a non-appealable ban. Respect the sanctuary.</div>
                 </div>
+
                 <div class="bible-item">
                     <div class="rule-no">DECREE 03-04</div>
                     <div class="rule-main">Obey the Elders. Zero Scamming.</div>
                     <div class="rule-sub">Do not argue moderation decisions. Do not attempt to deceive.</div>
                 </div>
+
                 <div class="bible-item">
                     <div class="rule-no">DECREE 05-06</div>
                     <div class="rule-main">Punishment Evasion is Exile.</div>
                     <div class="rule-sub">Do not forge evidence. Accept your penance with honor.</div>
                 </div>
+
                 <div class="bible-item">
                     <div class="rule-no">DECREE 07-09</div>
                     <div class="rule-main">No Politics. No Harassment.</div>
                     <div class="rule-sub">Doxxing, blackmail, and 18+ content are prohibited. Keep focus on the fight.</div>
                 </div>
+
                 <div class="bible-item">
                     <div class="rule-no">DECREE 10-13</div>
                     <div class="rule-main">Clean the Scrolls.</div>
                     <div class="rule-sub">No advertising, no spamming, no flood. Silence the noise.</div>
                 </div>
+
                 <div class="bible-item">
                     <div class="rule-no">DECREE 14-17</div>
                     <div class="rule-main">One Identity. 13+ Seasons.</div>
@@ -237,6 +354,7 @@
             </div>
         </section>
 
+        <!-- JOIN -->
         <section id="join">
             <div class="join-wrap">
                 <a href="https://discord.gg/spartas" target="_blank" class="big-link">DISCORD_</a>
@@ -248,58 +366,49 @@
     </main>
 
     <script>
-        // --- LENIS SMOOTH SCROLL ---
+        /* LENIS */
         const lenis = new Lenis();
-        function raf(time) { lenis.raf(time); requestAnimationFrame(raf); }
+        function raf(time) {
+            lenis.raf(time);
+            requestAnimationFrame(raf);
+        }
         requestAnimationFrame(raf);
 
-        // --- CURSOR LOGIC ---
-        const cursor = document.getElementById('cursor');
-        const aura = document.getElementById('aura');
-        document.addEventListener('mousemove', (e) => {
-            gsap.to(cursor, { x: e.clientX, y: e.clientY, duration: 0 });
-            gsap.to(aura, { x: e.clientX - 20, y: e.clientY - 20, duration: 0.15 });
-        });
-
-        // --- PAGE LOGIC ---
+        /* PAGE SWITCHING */
         let current = 'home';
+
         function toPage(id) {
             if (id === current) return;
-            
+
             const tl = gsap.timeline();
-            tl.to("#shutter", { scaleY: 1, duration: 0.4, ease: "power4.inOut", transformOrigin: "top" });
-            
+
+            tl.to("#shutter", {
+                scaleY: 1,
+                duration: 0.4,
+                ease: "power4.inOut",
+                transformOrigin: "top"
+            });
+
             tl.add(() => {
                 document.querySelectorAll('section').forEach(s => s.classList.remove('active'));
                 document.querySelectorAll('.nav-links a').forEach(a => a.classList.remove('active'));
+
                 document.getElementById(id).classList.add('active');
                 document.getElementById('l-' + id).classList.add('active');
+
                 current = id;
             });
 
-            tl.to("#shutter", { scaleY: 0, duration: 0.4, ease: "power4.inOut", transformOrigin: "bottom" });
+            tl.to("#shutter", {
+                scaleY: 0,
+                duration: 0.4,
+                ease: "power4.inOut",
+                transformOrigin: "bottom"
+            });
         }
-
-        // Hover Effect
-        document.querySelectorAll('a, .roster-row').forEach(el => {
-            el.addEventListener('mouseenter', () => {
-                gsap.to(aura, { scale: 1.5, borderColor: '#fff' });
-                cursor.style.backgroundColor = 'var(--accent)';
-            });
-            el.addEventListener('mouseleave', () => {
-                gsap.to(aura, { scale: 1, borderColor: 'var(--accent)' });
-                cursor.style.backgroundColor = '#fff';
-            });
-        });
     </script>
+
 </body>
 </html>
-
-
-
-
-
-
-
 
 
