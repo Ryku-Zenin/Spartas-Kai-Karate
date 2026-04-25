@@ -74,20 +74,28 @@
         }
         section.active { opacity: 1; visibility: visible; transform: scale(1); filter: blur(0px); }
 
-      .hero-title {
-          .hero-title { font-size: clamp(3rem, 12vw, 10rem) !important; }
+      /* 1. Cap the title size so it doesn't swallow the laptop screen */
+.hero-title {
     font-family: 'Syncopate', sans-serif;
-    /* We bumped the preferred size to 25vw to make it bigger */
-    /* We set the min to 5rem to keep it huge even on mobile */
-    font-size: clamp(5rem, 25vw, 20rem); 
-    
-    line-height: 0.85;
+    /* (min: 3rem, preferred: 12vw, max: 8rem) */
+    /* 8rem is the "stop growing" point on big screens */
+    font-size: clamp(3rem, 12vw, 8rem) !important; 
+    line-height: 0.8;
     text-transform: uppercase;
-    font-weight: 800;
+    word-break: break-word;
+}
+
+/* 2. Give the layout breathing room on laptops */
+@media (min-width: 1024px) {
+    section {
+        padding-left: 10% !important; /* Moves the text away from the left edge */
+        padding-right: 10% !important;
+    }
     
-    /* This forces the text to stay on the screen without clipping */
-    word-break: break-all;
-    width: 100%;
+    /* Keep nav clean on desktop */
+    nav {
+        padding: 3rem 10% !important;
+    }
 }
         }
         .hero-sub {
@@ -290,6 +298,8 @@
     </script>
 </body>
 </html>
+
+
 
 
 
